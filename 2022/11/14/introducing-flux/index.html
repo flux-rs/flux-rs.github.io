@@ -317,7 +317,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 </tr>
 </tbody>
 </table>
-<p>Flux allows such specifications by pairing plain Rust types (e.g. <code>i32</code>) with <em>assertions</em> [^1] that constrain the value. For example, we can rewrite <code>mk_10</code> as:</p>
+<p>Flux allows such specifications by pairing plain Rust types (e.g. <code>i32</code>) with <em>assertions</em> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that constrain the value. For example, we can rewrite <code>mk_10</code> as:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span><span class="at">()</span> <span class="op">-&gt;</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span> <span class="dv">0</span> <span class="op">&lt;</span> v<span class="op">}</span><span class="at">)]</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> mk_ten() <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>    <span class="dv">5</span> <span class="op">+</span> <span class="dv">5</span></span>
@@ -352,7 +352,12 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <li><p><em>specify</em> contracts on functions that state <strong>pre-conditions</strong> on the sets of legal inputs that they accept, and <strong>post-conditions</strong> that describe the outputs that they produce.</p></li>
 </ol>
 <p>The whole point of Rust, of course, is to allow for efficient <em>imperative</em> sharing and updates, without sacrificing thread- or memory-safety. Next time, we’ll see how Flux melds refinements and Rust’s ownership to make refinements happily coexist with imperative code.</p>
-<p>[^1] These are not arbitrary Rust expressions but a subset of expressions from logics that can be efficiently decided by <a href="https://github.com/liquid-rust/flux/blob/main/README.md#grammar-of-refinements">SMT Solvers</a></p>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>These are not arbitrary Rust expressions but a subset of expressions from logics that can be efficiently decided by <a href="https://github.com/liquid-rust/flux/blob/main/README.md#grammar-of-refinements">SMT Solvers</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
                 <hr>
                 <ul class="pager">
                     

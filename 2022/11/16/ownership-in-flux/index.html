@@ -221,7 +221,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
             </div>
 
             <br>
-			            <p>[Previously][introducing-flux] we saw how to refine basic Rust types like <code>i32</code> and <code>bool</code> with <em>indices</em> and <em>constraints</em> to constrain the set of values described by those types.</p>
+			            <p><a href="http://goto.ucsd.edu:8091/index.html#?demo=ownership.rs">Online demo</a></p>
+<p><a href="https://liquid-rust.github.io/2022/11/14/introducing-flux/">Previously</a> we saw how to refine basic Rust types like <code>i32</code> and <code>bool</code> with <em>indices</em> and <em>constraints</em> to constrain the set of values described by those types.</p>
 <p>The whole point of Rust, of course, is to allow for efficient imperative <em>sharing</em> and <em>updates</em>, via its clever type system that tracks the <em>ownership</em> of resources to make sure that aliasing and mutation cannot happen at the same time. Next, lets see how Flux melds refinements and Rust’s ownership mechanisms to make refinements work in the imperative setting.</p>
 <!-- more -->
 <h2 id="exclusive-ownership">Exclusive Ownership</h2>
@@ -238,7 +239,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>    r</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
 <p>The variable <code>r</code> has <em>different types</em> at each point inside <code>mk_three</code>. It starts off as <code>i32[0]</code>. The first increment changes it to <code>i32[1]</code>, then <code>i32[2]</code> and finally <code>i32[3]</code>, which is what is returned.</p>
-<p>In fact, the same mechanism is at work in the <code>factorial</code> example that we signed off with [previously][introducing-flux]</p>
+<p>In fact, the same mechanism is at work in the <code>factorial</code> example that we signed off with <a href="https://liquid-rust.github.io/2022/11/14/introducing-flux/">previously</a></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span> <span class="at">(</span>n<span class="op">:</span><span class="dt">i32</span><span class="op">{</span><span class="dv">0</span> <span class="op">&lt;=</span> n<span class="op">}</span><span class="at">)</span> <span class="op">-&gt;</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span>n <span class="op">&lt;=</span> v<span class="op">}</span><span class="at">)]</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> factorial(n<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// i: i32[0]</span></span>
@@ -251,7 +252,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>    <span class="op">}</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>    r</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
-<p>In the above code, <code>i</code> and <code>r</code> start off at <code>0</code> and <code>1</code> but then Rust <em>infers</em> (a story for another day) that inside the <code>while</code>-loop[^1]</p>
+<p>In the above code, <code>i</code> and <code>r</code> start off at <code>0</code> and <code>1</code> but then Rust <em>infers</em> (a story for another day) that inside the <code>while</code>-loop<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <ul>
 <li><code>i</code> has type <code>i32{v:0&lt;=v &amp;&amp; v &lt; n}</code></li>
 <li><code>r</code> has type <code>i32{v:1&lt;=v &amp;&amp; i &lt;= v}</code></li>
@@ -330,7 +331,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>    <span class="op">|</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a> <span class="dv">15</span> <span class="op">|</span>     assert(x <span class="op">==</span> <span class="dv">11</span>)</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a>    <span class="op">|</span>     <span class="op">^^^^^^^^^^^^^^^</span></span></code></pre></div>
-<p>To check this code, we need a specification for <code>incr</code> that says that its <em>output</em> is indeed one greater[^2] than its input.</p>
+<p>To check this code, we need a specification for <code>incr</code> that says that its <em>output</em> is indeed one greater<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> than its input.</p>
 <p>We do so using <em>strong references</em> of the form <code>&amp;strg T</code> which refine Rust’s <code>&amp;mut T</code> and, like mutable references, also grant temporary exclusive access but allow so-called `<code>strong updates'' by tracking the precise location the reference points to, and crucially, allowing us to specify the updated type upon the function return. We use strong references to type</code>incr` as</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span><span class="at">(</span>p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span>[<span class="op">@</span>n<span class="at">]</span>) ensures <span class="op">*</span>p<span class="op">:</span> <span class="dt">i32</span>[n<span class="op">+</span><span class="dv">1</span>])]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="kw">fn</span> incr(p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span>) <span class="op">{</span></span>
@@ -344,7 +345,13 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>With this specification, Flux gladly checks <code>test_incr</code>, by determining that the refinement parameter is <code>10</code> and hence, that upon return <code>x: i32[11]</code>.</p>
 <h2 id="summary">Summary</h2>
 <p>To sum up, Flux exploits Rust’s ownership mechanisms to track properties of <em>shared</em> (<code>&amp;T</code>) and <em>mutable</em> (<code>&amp;mut T</code>) references, and additionally adds a <em>strong</em> (<code>&amp;strg T</code>) reference – a special case of <code>&amp;mut</code> – to support the cases where the type itself is <em>changed</em> by a call. Next, we’ll see how refinements and ownership yield a simple refined API for vectors, that allow Flux to check properties of unbounded collections.</p>
-<p>[^1] For those familiar with the term, these types are <em>loop invariants</em> [^2] Setting aside the issue of overflows for now</p>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>For those familiar with the term, these types are <em>loop invariants</em><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Setting aside the issue of overflows for now<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
                 <hr>
                 <ul class="pager">
                     

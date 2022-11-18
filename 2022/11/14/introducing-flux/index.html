@@ -221,7 +221,8 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
             </div>
 
             <br>
-			            <p>Types bring order to code. For example, if a variable <code>i:usize</code> then we know <code>i</code> is a number that can be used to index a vector. Similarly, if <code>v:vec&lt;&amp;str&gt;</code> then we can be sure that <code>v</code> is a collection of strings which may <em>be</em> indexed but of course, not used <em>as</em> an index. However, by itself <code>usize</code> doesn’t tell us how big or small the number and hence the programmer must still rely on hope, their own wits, and hopefully a lot of tests, to ensure that all the different bits fit properly at run-time.</p>
+			            <p><a href="http://goto.ucsd.edu:8091/index.html#?demo=basics.rs">Online demo</a></p>
+<p>Types bring order to code. For example, if a variable <code>i:usize</code> then we know <code>i</code> is a number that can be used to index a vector. Similarly, if <code>v:vec&lt;&amp;str&gt;</code> then we can be sure that <code>v</code> is a collection of strings which may <em>be</em> indexed but of course, not used <em>as</em> an index. However, by itself <code>usize</code> doesn’t tell us how big or small the number and hence the programmer must still rely on hope, their own wits, and hopefully a lot of tests, to ensure that all the different bits fit properly at run-time.</p>
 <p><a href="https://arxiv.org/abs/2010.07763">Refinements</a> are a promising new way to extend type checkers with logical constraints that <em>specify</em> additional correctness requirements that can be <em>verified</em> by the compiler, thereby entirely eliminating various classes of run-time problems.</p>
 <p>We’re excited to introduce <a href="https://github.com/liquid-rust/flux/">Flux</a>, a refinement type checker plugin that brings this technology to <code>Rust</code>.</p>
 <!-- more -->

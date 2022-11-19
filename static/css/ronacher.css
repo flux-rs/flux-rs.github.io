@@ -2,30 +2,11 @@
 
 /* fonts */
 @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400italic,700,700italic|Merriweather:400,700,400italic,700italic,300,300italic|Crimson+Text:400,400italic,600italic,600&subset=latin,latin-ext);
-@import url(https://fonts.googleapis.com/css?family=EB Garamond);
-
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>Loving the font changes</title>
-</head>
-<body>
-<h1>Big title</h1>
-<ol>
-<li style="font-size:16px; font-family:Garmond">This 
-item is big Garamond.</li>
-<li style="font-size:12px; font-family:Verdana">This 
-item is medium Verdana.</li>
-<li style="font-size:10px; font-family:Impact">This 
-item is small Impact.</li>
-</ol>
-</body>
-</html>
+/* @import url(https://fonts.googleapis.com/css?family=EB Garamond); */
 
 /* general style */
 /* body    { font: 17px/25px 'Merriweather', serif; margin: 0; padding: 0; font-weight: 400; color: black; line-height: 30px; } */
-body    { font-family: 'EB Garamond';font-size: 22px; margin: 0; padding: 0; font-weight: 400; color: black; line-height: 30px; }
+body    { font-family: 'EB Garamond';font-size: 22px; margin: 0; padding: 0;  color: black; line-height: 30px; }
 
 a       { color: gray; /* #398ad5; */ font-weight: 400; }
 a:hover { color: #2771b5; }
@@ -80,9 +61,10 @@ h1 + p.date                     { margin-top: -25px; font-style: italic; }
 blockquote                      { font-style: italic; }
 
 /* code formatting.  no monospace because of webkit (bug?) */
-pre, code, tt   { font-family: 'Ubuntu Mono', 'Consolas', 'Deja Vu Sans Mono',
+pre, code, tt   { font-family: 'Consolas', 'Deja Vu Sans Mono',
                   'Bitstream Vera Sans Mono', 'Monaco', 'Courier New';
-                  font-size: 0.9em; }
+		  font-size: 21px
+                }
 pre             { line-height: 1.45; background: none; padding: 0; }
 /* code, tt        { background: #eee; } */
 

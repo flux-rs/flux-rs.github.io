@@ -12,7 +12,7 @@
 
 .hs-keyword {
   color: #007020;
-  // font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .hs-comment, .hs-comment a {color: green;}
@@ -21,7 +21,7 @@
 
 .hs-conid {
   color: #902000;   /* color: #00FFFF; color: #0E84B5; */
-  //font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .hs-definition {
@@ -90,7 +90,8 @@ code {
    */
   background-color: white;
   color: black;
-  font-size: 120%;
+  /* font-size: 120%; */
+  font-size: 80%;
   padding-left: 4px;
   padding-right: 4px;
 }
@@ -105,8 +106,8 @@ pre {
      border-bottom: 1px solid #ccc;
   */
   padding: 5px;
-  font-size: 120%;
-  // font-family: Bitstream Vera Sans Mono,monospace;
+  font-size: 80%;
+  /* font-family: Bitstream Vera Sans Mono,monospace; */
   display: block;
   overflow: visible;
 }

@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    
+    <head>
+   <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106786912-1">
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+      gtag('config', 'UA-106786912-1');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=EB Garamond" rel="stylesheet">
+
+
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <!--
+      loads the http over https ssl -
+      welcome to my website!
+
+	this theme is based off the Ice & Fire theme created by Lucas Gatsas
+      https://www.twitter.com/LucasGatsas
+      www.lucasgatsas.ch - switzerland.
+  -->
+
+
+<!-- Microsoft Internet Explorer documentMode compatMode setting IE Modus -->
+<script type="text/javascript">
+var IE = null;
+if (window.navigator.appName == "Microsoft Internet Explorer") {
+  if (document.documentMode) {
+
+    IE = document.documentMode;
+    } else {
+
+        IE = 5;
+          if (document.compatMode) {
+      if (document.compatMode == "CSS1Compat")
+      IE = 11;
+      }
+    }
+  }
+</script>
+
+    <meta charset="utf-8">
+    <!-- X-UA -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <link rel="author" title="Ranjit Jhala" href="http://ranjitjhala.github.io" />
+
+    <meta name="google" content="notranslate" />
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- index ROBOTS follow -->
+    <meta name="robots" content="index, follow" />
+    <!-- Site Desciption -->
+    <meta name="description" content="Flux: Refinement Types for Rust">
+    <!-- Site Desciption -->
+    <meta name="keywords" content="haskell, refinement types, liquid types, formal methods, type systems">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://liquid-rust.github.io/static/img/ico.png" type="image/x-icon" />
+    <!-- Blog Title -->
+    <title>Flux</title>
+
+    <!--     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+-->
+    <!-- Property Metas -->
+    <meta property="og:image" content="https://liquid-rust.github.io/static/img/ix.png" />
+    <meta property="og:title" content="Flux: Refinement Types for Rust" />
+    <meta property="og:site_name" content="Flux: Refinement Types for Rust" />
+    <!-- Canonical -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseUrl | prepend: site.url }}">
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="https://liquid-rust.github.io/static/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://liquid-rust.github.io/static/css/spaceg.stylesheets.css"> -->
+    <link rel="stylesheet" href="https://liquid-rust.github.io/static/css/ronacher.css" type="text/css">
+    <link rel="stylesheet" href="https://liquid-rust.github.io/static/css/syntax.css">
+    <link rel="stylesheet" href="https://liquid-rust.github.io/static/css/liquid-light.css">
+
+    <!-- Fonts
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+	#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:url("/static/img/preloader.gif"); /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	ul, ol {margin-top: 0;margin-bottom: 10px;}
+	.navbar-inverse {background-color: #FFF;border-color: #FFFFFF;}
+</style>
+<!--link rel="stylesheet" href="https://liquid-rust.github.io/static/css/prettify.css"-->
+<style>
+  /* HEADER IMAGE */
+  header.intro-header {background: #6f5499;background: no-repeat center center;background-attachment: scroll;-webkit-background-size: cover;-moz-background-size: cover;background-size: cover;-o-background-size: cover;}
+
+	/* Preloader */#preloader {position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff; /* change if the mask should have another color then white */z-index:99; /* makes sure it stays on top */}
+	#status {width:200px;height:200px;position:absolute;left:50%; /* centers the loading animation horizontally one the screen */top:50%; /* centers the loading animation vertically one the screen */background-image:; /* path to your loading animation */background-repeat:no-repeat;background-position:center;margin:-100px 0 0 -100px; /* is width and height divided by two */}
+	li {list-style: none;}
+            body.modal-open
+            {overflow: hidden;padding-right: 0px;
+        }
+	article li {list-style: inherit;}
+	article .figure {text-align: center}
+    </style>
+    <!-- end Loading front stylesheet here -->
+
+    <link href="atom.xml" type="application/atom+xml" rel="alternate" title="LiquidHaskell-Blog ATOM Feed" />
+    </head>
+
+    <body>
+	<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://liquid-rust.github.io/index.html" id="blog-title-left-top">Flux</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.github.com/liquid-rust/flux"><i class="fa fa-github"></i>Code</a></li>
+                <li><a href="https://arxiv.org/abs/2207.04034" target="_blank">Paper</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<!-- Portfolio Modals -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Menu Modals Add New Sa.21.Feb.2015 03:22:25 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right:0px; overflow: hidden;">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+        
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h1 class="font-style-inline-small-h1">Flux: Refinement Types for Rust</h1>
+                            <hr class="star-primary">
+                            <p class="font-style-inline-small">
+                            <li><a href="http://www.github.com/liquid-rust/flux"><i class="fa fa-github"></i>Code</a></li>
+                            <li><a href="https://arxiv.org/abs/2207.04034" target="_blank">Paper</a></li>
+                            <li><a href="about.html">About</a></li>
+                            </p>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+        <div id="content">
+            <!-- Post Header -->
+<header class="intro-header" style="background-image: url('https://liquid-rust.github.io/static/img/dots.jpg')" alt title>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Ownership in Flux</h1>
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+            <br>
+            <span class="meta">
+	      
+		Posted by Ranjit Jhala
+	      
+		Nov 29, 2022
+            </span>
+            <div class="info">
+              
+                Tags: <a title="All pages tagged 'basic'." href="../../../../tags/basic.html">basic</a>
+              
+            </div>
+
+            <br>
+			            <p><a href="http://goto.ucsd.edu:8091/index.html#?demo=ownership.rs">Online demo</a></p>
+<p><a href="https://liquid-rust.github.io/2022/11/14/introducing-flux/">Previously</a> we saw how to refine basic Rust types like <code>i32</code> and <code>bool</code> with <em>indices</em> and <em>constraints</em> to constrain the set of values described by those types.</p>
+<p>The whole point of Rust, of course, is to allow for efficient imperative <em>sharing</em> and <em>updates</em>, via the clever type system that keeps an eye on the <em>ownership</em> of resources to make sure that aliasing and mutation cannot happen at the same time.</p>
+<p>Next, lets see how Flux melds refinements and Rust’s ownership mechanisms to make refinements work in the imperative setting.</p>
+<!-- more -->
+<p><br></p>
+<h2 id="exclusive-ownership">Exclusive Ownership</h2>
+<p>Rust’s most basic form of ownership is <em>exclusive</em> ownership, in which exactly one variable in a function has the right to mutate a memory location. When a location is exclusively owned, we can be sure that there are <em>no other references</em> to it, which lets flux <em>update</em> the type whenever the location is changed. For example, consider the program</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span> <span class="at">()</span> <span class="op">-&gt;</span> <span class="dt">i32</span>[<span class="dv">3</span><span class="at">]</span>)]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> mk_three() <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> r <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// r: i32[0]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>    r <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>    assert(r <span class="op">==</span> <span class="dv">1</span>)<span class="op">;</span> <span class="co">// r: i32[1]</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>    r <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>    assert(r <span class="op">==</span> <span class="dv">2</span>)<span class="op">;</span> <span class="co">// r: i32[2]</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>    r <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>    assert(r <span class="op">==</span> <span class="dv">3</span>)<span class="op">;</span> <span class="co">// r: i32[3]</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>    r</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<p>The variable <code>r</code> has <em>different types</em> at each point inside <code>mk_three</code>. It starts off as <code>i32[0]</code>. The first increment changes it to <code>i32[1]</code>, then <code>i32[2]</code> and finally, the returned type <code>i32[3]</code>.</p>
+<p><img src="../../../../static/img/mk_three.gif" style="width: 75%; margin: auto;" /></p>
+<p>This exclusive ownership mechanism is at work in the <code>factorial</code> example we signed off with <a href="https://liquid-rust.github.io/2022/11/14/introducing-flux/">previously</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span> <span class="at">(</span>n<span class="op">:</span><span class="dt">i32</span><span class="op">{</span><span class="dv">0</span> <span class="op">&lt;=</span> n<span class="op">}</span><span class="at">)</span> <span class="op">-&gt;</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span>n <span class="op">&lt;=</span> v<span class="op">}</span><span class="at">)]</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> factorial(n<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// i: i32[0]</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> r <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>  <span class="co">// r: i32[1]</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    <span class="kw">while</span> i <span class="op">&lt;</span> n <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>                    <span class="co">// i: i32{v:0&lt;=v&lt;=n}</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>                    <span class="co">// r: i32{v:1&lt;=v &amp;&amp; i&lt;=v}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>        i <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>        r <span class="op">=</span> r <span class="op">*</span> i<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>    r</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<p>In the above code, <code>i</code> and <code>r</code> start off at <code>0</code> and <code>1</code> but then Rust <em>infers</em> (a story for another day) that inside the <code>while</code>-loop<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<ul>
+<li><code>i</code> has type <code>i32{v:0&lt;=v &amp;&amp; v &lt; n}</code></li>
+<li><code>r</code> has type <code>i32{v:1&lt;=v &amp;&amp; i &lt;= v}</code></li>
+</ul>
+<p>and hence, upon exit since <code>i == n</code> we get that the result is at least <code>n</code>.</p>
+<p><br></p>
+<h2 id="borrowing-shared-references">Borrowing: Shared References</h2>
+<p>Exclusive ownership suffices for simple local updates like in <code>factorial</code>. However, for more complex data, functions must temporarily relinquish ownership to allow <em>other</em> functions to mutate the data. Rust cleverly allows this via the notion of <em>borrowing</em> using two kinds of references that give callees temporary access to a memory location.</p>
+<p>The simplest kind of references are of the form <code>&amp;T</code> which denote <em>read-only</em> access to a value of type <code>T</code>. For example, we might write <code>abs</code> to take a shared reference to an <code>i32</code></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span> <span class="at">(</span>p<span class="op">:</span> <span class="op">&amp;</span><span class="dt">i32</span>[<span class="op">@</span>n<span class="at">]</span>) <span class="op">-&gt;</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span><span class="dv">0</span><span class="op">&lt;=</span>v <span class="op">&amp;&amp;</span> n<span class="op">&lt;=</span>v<span class="op">}</span>)]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> abs(p<span class="op">:</span> <span class="op">&amp;</span><span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>    <span class="kw">let</span> n <span class="op">=</span> <span class="op">*</span>p<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>    <span class="kw">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> n <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>        n</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>        <span class="dv">0</span> <span class="op">-</span> n</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<p>Notice that the <em>input</em> type has changed: the function now</p>
+<ul>
+<li>Accepts <code>p</code> a <em>reference</em> to an <code>i32</code> whose value is <code>n</code> as denoted by <code>@n</code></li>
+<li>Returns an <code>i32</code> that is non-negative and larger than <code>n</code></li>
+</ul>
+<p>The <code>@</code> marks the <code>n</code> as a <em>refinement parameter</em> whose value is automatically computed by flux during type checking.</p>
+<p>So, for example, Flux can check the below code by automatically determining that the refinement parameter at the call-site is <code>10</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> test_abs() <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>    <span class="kw">let</span> z <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>    assert(<span class="dv">0</span> <span class="op">&lt;=</span> abs(<span class="op">&amp;</span>z))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>    assert(<span class="dv">10</span> <span class="op">&lt;=</span> abs(<span class="op">&amp;</span>z))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<p><strong>Refinement Parameters</strong></p>
+<p>As an aside, we have secretly been using <em>refinement parameters</em> like <code>@n</code> all along. For example, Flux automatically <em>desugars</em> the signature <code>fn(n:i32{0 &lt;= n} -&gt; ...</code> that we wrote for <code>factorial</code> into</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">fn</span> (<span class="op">{</span><span class="dt">i32</span>[<span class="op">@</span>n] <span class="op">:</span> <span class="dv">0</span> <span class="op">&lt;=</span> n<span class="op">}</span>) <span class="op">-&gt;</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span>n <span class="op">&lt;=</span> v<span class="op">}</span></span></code></pre></div>
+<p>where <code>@n</code> is a refinement parameter that is <em>implicitly</em> determined from the rust parameter <code>n:i32</code>. However, <em>explicit</em> parameters are essential to <em>name</em> the value of what a reference points to. In <code>abs</code> the <code>rust</code> parameter <code>p</code> names the reference but the <code>@n</code> names the (input) <em>value</em> and lets us use it to provide more information about the output of <code>abs</code>.</p>
+<p>Flux is <em>modular</em> in that the <em>only</em> information it knows about the implementation of <code>abs</code> is the signature: for example if we remove the fact that the output exceeds <code>n</code> then Flux will reject the assertion <code>10 &lt;= abs(&amp;z)</code>.</p>
+<p><img src="../../../../static/img/test_abs.gif" style="width: 75%; margin: auto;" /></p>
+<p><br></p>
+<h2 id="borrowing-mutable-references">Borrowing: Mutable References</h2>
+<p>References of type <code>&amp;mut T</code> denote <em>mutable</em> references that can be used to (read and) write or update the contents of a <code>T</code> value. Crucially, Rust ensures that while there may be multiple read-only (shared) references to a location, there is at most one <em>active</em> writeable (mutable) reference at any point in time.</p>
+<p>Flux exploits the semantics of <code>&amp;mut T</code> to treat <code>T</code> as an <em>invariant</em> of the underlying data. As an example, consider the following function that <em>decrements</em> the value of a mutable reference while ensuring the data is non-negative:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span><span class="at">(</span>p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span><span class="dv">0</span> <span class="op">&lt;=</span> v<span class="op">}</span><span class="at">))]</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> decr(p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span>) <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>    <span class="op">*</span>p <span class="op">=</span> <span class="op">*</span>p <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<p>Flux will complain with the following message</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>error[FLUX]<span class="op">:</span> assignment might be <span class="kw">unsafe</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>  <span class="op">--&gt;</span> src<span class="op">/</span>basics<span class="op">.</span>rs<span class="op">:</span><span class="dv">13</span><span class="op">:</span><span class="dv">9</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>   <span class="op">|</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="dv">13</span> <span class="op">|</span>         <span class="op">*</span>p <span class="op">=</span> <span class="op">*</span>p <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>   <span class="op">|</span>         <span class="op">^^^^^^^^^^^</span></span></code></pre></div>
+<p>as in fact, we <em>may</em> be writing a negative value into <code>*p</code> if, for example, the old value was zero. We can fix this code by guarding the update with a test that ensures the original contents are in fact <em>non-zero</em></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span><span class="at">(</span>p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span><span class="dv">0</span> <span class="op">&lt;=</span> v<span class="op">}</span><span class="at">))]</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> decr(p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span>) <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>    <span class="kw">let</span> n <span class="op">=</span> <span class="op">*</span>p<span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a>    <span class="kw">if</span> n <span class="op">!=</span> <span class="dv">0</span> <span class="op">{</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>        <span class="op">*</span>p <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a>    <span class="op">}</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<p>at which point Flux is happy to sign off on the code.</p>
+<p><img src="../../../../static/img/decr.gif" style="width: 75%; margin: auto;" /></p>
+<p><br></p>
+<h2 id="aliased-references">Aliased References</h2>
+<p>Flux uses Rust’s borrowing rules to track invariants even when there may be aliasing. As an example, consider the function</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span> <span class="at">(</span><span class="dt">bool</span><span class="at">)</span> <span class="op">-&gt;</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span><span class="dv">0</span> <span class="op">&lt;=</span> v<span class="op">}</span><span class="at">)]</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="kw">fn</span> test_alias(z<span class="op">:</span> <span class="dt">bool</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>  <span class="co">// x: i32[1]</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>    <span class="kw">let</span> <span class="kw">mut</span> y <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>  <span class="co">// y: i32[2]</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>    <span class="kw">let</span> r <span class="op">=</span> <span class="kw">if</span> z <span class="op">{</span> <span class="op">&amp;</span><span class="kw">mut</span> x <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span> <span class="op">&amp;</span><span class="kw">mut</span> y <span class="op">};</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>                    <span class="co">// r: &amp;mut i32{v:0 &lt;= v}</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a>    decr(r)<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>    <span class="op">*</span>r</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<p>The reference <code>r</code> could point to <em>either</em> <code>x</code> or <code>y</code> depending on the (unknown) value of the boolean <code>z</code>. Nevertheless, Flux determines that <em>both</em> references <code>&amp;mut x</code> and <code>&amp;mut y</code> point to values of the more general type <code>i32{v:0&lt;=v}</code> and hence, infers <code>r : &amp;mut i32{v:0&lt;=v}</code> which allows us it to then call <code>decr</code> with the reference and guarantee the result (after <code>decr</code>) is still non-negative.</p>
+<p><br></p>
+<h2 id="borrowing-strong-references">Borrowing: Strong References</h2>
+<p>In many situations, we want to lend a value to another function that actually <em>changes</em> the value’s (refinement) type upon exit. For example, consider the following function to increment a reference to a non-negative <code>i32</code></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span> <span class="at">(</span>p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span><span class="dv">0</span> <span class="op">&lt;=</span> v<span class="op">}</span><span class="at">))]</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="kw">fn</span> incr(p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span>) <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>  <span class="op">*</span>p <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<p>Recall that Flux is <em>modular</em> in that the <em>only</em> information it has about <code>incr</code> is what is said in the signature. The signature for <code>incr</code> only says <code>p</code> remains non-negative: Flux does not know that <code>incr</code> actually <em>increments</em> the value of <code>p</code>. Hence, Flux fusses that the following <code>assert</code> may fail even though its patently obvious that it will succeed!</p>
+<p><img src="../../../../static/img/test_incr.gif" style="width: 75%; margin: auto;" /></p>
+<p>To verify <code>test_incr</code> we need a signature for <code>incr</code> that says that its <em>output</em> is indeed one greater<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> than its input. Flux extends Rust with the notion of <strong>strong references</strong> of the form <code>&amp;strg T</code> which refine Rust’s <code>&amp;mut T</code> to grant <em>exclusive</em> access to the underlying <code>T</code>. Crucially, strong references also let us specify how the type is <em>updated</em> when the function exits<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Thus, we can use strong references to type <code>incr</code> as</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span><span class="at">(</span>p<span class="op">:</span> <span class="op">&amp;</span>strg <span class="dt">i32</span>[<span class="op">@</span>n<span class="at">]</span>) ensures p<span class="op">:</span><span class="dt">i32</span>[n<span class="op">+</span><span class="dv">1</span>])]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a><span class="kw">fn</span> incr(p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span>) <span class="op">{</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>  <span class="op">*</span>p <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a><span class="op">}</span></span></code></pre></div>
+<p>The Flux signature refines the plain Rust one to specify that</p>
+<ol type="1">
+<li><code>p</code> is a strong reference to an <code>i32</code>,</li>
+<li>the <em>input type</em> of <code>*p</code> is <code>i32[n]</code>, and</li>
+<li>the <em>output type</em> of <code>*p</code> is <code>i32[n+1]</code>.</li>
+</ol>
+<p>With this specification, Flux merrily checks <code>test_incr</code>, by determining that the refinement parameter <code>@n</code> is <code>10</code> and hence, that upon return <code>x: i32[11]</code>.</p>
+<p><br></p>
+<h2 id="summary">Summary</h2>
+<p>To sum up, Flux exploits Rust’s ownership mechanisms to track properties of <em>shared</em> (<code>&amp;T</code>) and <em>mutable</em> (<code>&amp;mut T</code>) references, and additionally adds a <em>strong</em> (<code>&amp;strg T</code>) reference – a special case of <code>&amp;mut</code> – to support the cases where the type itself is <em>changed</em> by a call.</p>
+<p>Next, we’ll see how refinements and ownership yield a simple refined API for <em>vectors</em> that lets Flux check bounds safety at compile time…</p>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>For those familiar with the term, these types are <em>loop invariants</em><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Setting aside the issue of overflows for now<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Thereby allowing so-called <em>strong updates</em> in the type specifications<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+                <hr>
+                <ul class="pager">
+                    
+                    
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+        </div>
+        <div id="footer">
+        </div>
+      <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="https://liquid-rust.github.io/feed.xml" data-datatype="json" data-type="GET" data-target="#frame" class="reload" id="clickme">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://github.com/liquid-rust" target="_blank">
+                            <span class="fa-stack fa-lg">
+
+                              <i class="fa fa-arrow-circle-o-down"></i>
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+		    
+                </ul>
+                <p class="copyright text-muted">
+                
+                  Copyright &copy; Ranjit Jhala 2022.
+                  Generated by <a href="http://jaspervdj.be/hakyll">Hakyll</a>,
+                  template by <a href="http://lucumr.pocoo.org">Armin Ronacher</a>,
+                  suggest improvements <a href="https://github.com/ucsd-progsys/liquidhaskell-blog/">here</a>.
+                
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- jQuery -->
+<script src="https://liquid-rust.github.io/static/js/jquery.min.js"></script>
+<script src="https://liquid-rust.github.io/static/js/spaceg.stylesheets.min.js"></script>
+<script src="https://liquid-rust.github.io/static/js/bootstrap.min.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<!-- <script src="https://liquid-rust.github.io/static/js/anim.js"></script>
+      <script src="https://liquid-rust.github.io/static/js/scripts.js"></script>
+  -->
+
+    </body>
+</html>

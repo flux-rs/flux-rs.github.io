@@ -230,6 +230,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <!-- more -->
 <p><br></p>
 <h2 id="exclusive-ownership">Exclusive Ownership</h2>
+<p><br></p>
 <p>Rust’s most basic form of ownership is <em>exclusive</em> ownership, in which exactly one variable in a function has the right to mutate a memory location. When a location is exclusively owned, we can be sure that there are <em>no other references</em> to it, which lets flux <em>update</em> the type whenever the location is changed. For example, consider the program</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span> <span class="at">()</span> <span class="op">-&gt;</span> <span class="dt">i32</span>[<span class="dv">3</span><span class="at">]</span>)]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">pub</span> <span class="kw">fn</span> mk_three() <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
@@ -265,6 +266,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>and hence, upon exit since <code>i == n</code> we get that the result is at least <code>n</code>.</p>
 <p><br></p>
 <h2 id="borrowing-shared-references">Borrowing: Shared References</h2>
+<p><br></p>
 <p>Exclusive ownership suffices for simple local updates like in <code>factorial</code>. However, for more complex data, functions must temporarily relinquish ownership to allow <em>other</em> functions to mutate the data. Rust cleverly allows this via the notion of <em>borrowing</em> using two kinds of references that give callees temporary access to a memory location.</p>
 <p>The simplest kind of references are of the form <code>&amp;T</code> which denote <em>read-only</em> access to a value of type <code>T</code>. For example, we might write <code>abs</code> to take a shared reference to an <code>i32</code></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span> <span class="at">(</span>p<span class="op">:</span> <span class="op">&amp;</span><span class="dt">i32</span>[<span class="op">@</span>n<span class="at">]</span>) <span class="op">-&gt;</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span><span class="dv">0</span><span class="op">&lt;=</span>v <span class="op">&amp;&amp;</span> n<span class="op">&lt;=</span>v<span class="op">}</span>)]</span>
@@ -296,6 +298,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p><img src="../../../../static/img/test_abs.gif" style="width: 75%; margin: auto;" /></p>
 <p><br></p>
 <h2 id="borrowing-mutable-references">Borrowing: Mutable References</h2>
+<p><br></p>
 <p>References of type <code>&amp;mut T</code> denote <em>mutable</em> references that can be used to (read and) write or update the contents of a <code>T</code> value. Crucially, Rust ensures that while there may be multiple read-only (shared) references to a location, there is at most one <em>active</em> writeable (mutable) reference at any point in time.</p>
 <p>Flux exploits the semantics of <code>&amp;mut T</code> to treat <code>T</code> as an <em>invariant</em> of the underlying data. As an example, consider the following function that <em>decrements</em> the value of a mutable reference while ensuring the data is non-negative:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span><span class="at">(</span>p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span><span class="dv">0</span> <span class="op">&lt;=</span> v<span class="op">}</span><span class="at">))]</span></span>
@@ -320,6 +323,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p><img src="../../../../static/img/decr.gif" style="width: 75%; margin: auto;" /></p>
 <p><br></p>
 <h2 id="aliased-references">Aliased References</h2>
+<p><br></p>
 <p>Flux uses Rust’s borrowing rules to track invariants even when there may be aliasing. As an example, consider the function</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span> <span class="at">(</span><span class="dt">bool</span><span class="at">)</span> <span class="op">-&gt;</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span><span class="dv">0</span> <span class="op">&lt;=</span> v<span class="op">}</span><span class="at">)]</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="kw">fn</span> test_alias(z<span class="op">:</span> <span class="dt">bool</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
@@ -333,6 +337,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>The reference <code>r</code> could point to <em>either</em> <code>x</code> or <code>y</code> depending on the (unknown) value of the boolean <code>z</code>. Nevertheless, Flux determines that <em>both</em> references <code>&amp;mut x</code> and <code>&amp;mut y</code> point to values of the more general type <code>i32{v:0&lt;=v}</code> and hence, infers <code>r : &amp;mut i32{v:0&lt;=v}</code> which allows us it to then call <code>decr</code> with the reference and guarantee the result (after <code>decr</code>) is still non-negative.</p>
 <p><br></p>
 <h2 id="borrowing-strong-references">Borrowing: Strong References</h2>
+<p><br></p>
 <p>In many situations, we want to lend a value to another function that actually <em>changes</em> the value’s (refinement) type upon exit. For example, consider the following function to increment a reference to a non-negative <code>i32</code></p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="at">#[</span><span class="pp">flux::</span>sig<span class="at">(</span><span class="kw">fn</span> <span class="at">(</span>p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span><span class="op">{</span>v<span class="op">:</span><span class="dv">0</span> <span class="op">&lt;=</span> v<span class="op">}</span><span class="at">))]</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a><span class="kw">fn</span> incr(p<span class="op">:</span> <span class="op">&amp;</span><span class="kw">mut</span> <span class="dt">i32</span>) <span class="op">{</span></span>
@@ -354,6 +359,7 @@ if (window.navigator.appName == "Microsoft Internet Explorer") {
 <p>With this specification, Flux merrily checks <code>test_incr</code>, by determining that the refinement parameter <code>@n</code> is <code>10</code> and hence, that upon return <code>x: i32[11]</code>.</p>
 <p><br></p>
 <h2 id="summary">Summary</h2>
+<p><br></p>
 <p>To sum up, Flux exploits Rust’s ownership mechanisms to track properties of <em>shared</em> (<code>&amp;T</code>) and <em>mutable</em> (<code>&amp;mut T</code>) references, and additionally adds a <em>strong</em> (<code>&amp;strg T</code>) reference – a special case of <code>&amp;mut</code> – to support the cases where the type itself is <em>changed</em> by a call.</p>
 <p>Next, we’ll see how refinements and ownership yield a simple refined API for <em>vectors</em> that lets Flux check bounds safety at compile time…</p>
 <section class="footnotes" role="doc-endnotes">
